@@ -3,6 +3,7 @@ import torch
 from nodes import MAX_RESOLUTION
 import torchvision.transforms.v2 as T
 from .utils import FONTS_DIR
+import logging
 
 class DrawText:
     @classmethod
@@ -12,8 +13,12 @@ class DrawText:
                 "text": ("STRING", { "multiline": True, "dynamicPrompts": True, "default": "Hello, World!" }),
                 "font": (sorted([f for f in os.listdir(FONTS_DIR) if f.endswith('.ttf') or f.endswith('.otf')]), ),
                 "size": ("INT", { "default": 56, "min": 1, "max": 9999, "step": 1 }),
-                "color": ("STRING", { "multiline": False, "default": "#FFFFFF" }),
-                "background_color": ("STRING", { "multiline": False, "default": "#00000000" }),
+                # "color": ("STRING", { "multiline": False, "default": "#FFFFFF" }),
+                "color": ("COLOR", {"default": "#FFFFFF"}),
+                "alpha": ("INT", { "default": 255, "min": 0, "max": 255, "step": 1 }),
+                # "background_color": ("STRING", { "multiline": False, "default": "#00000000" }),
+                "background_color": ("COLOR", {"default": "#000000"}),
+                "background_alpha": ("INT", { "default": 0, "min": 0, "max": 255, "step": 1 }),
                 "shadow_distance": ("INT", { "default": 0, "min": 0, "max": 100, "step": 1 }),
                 "shadow_blur": ("INT", { "default": 0, "min": 0, "max": 100, "step": 1 }),
                 "shadow_color": ("STRING", { "multiline": False, "default": "#000000" }),
@@ -32,8 +37,53 @@ class DrawText:
     FUNCTION = "execute"
     CATEGORY = "essentials/text"
 
-    def execute(self, text, font, size, color, background_color, shadow_distance, shadow_blur, shadow_color, horizontal_align, vertical_align, offset_x, offset_y, direction, img_composite=None):
+    def execute(self, text, font, size, color, alpha, background_color, background_alpha, shadow_distance, shadow_blur, shadow_color, horizontal_align, vertical_align, offset_x, offset_y, direction, img_composite=None):
         from PIL import Image, ImageDraw, ImageFont, ImageColor, ImageFilter
+
+        logging.info(f"color a: {color}")
+        logging.info(f"alpha a: {alpha}")
+        # 判断color格式(HEX/RGB/HSL)，以加上透明度alpha
+        if isinstance(color, str) and color.startswith("#"):
+            if len(color) == 7: # HEX
+                color = color + hex(alpha)[2:].zfill(2)
+            elif len(color) == 9: 
+                color = color[:7] + hex(alpha)[2:].zfill(2)
+            else:
+                raise ValueError("Invalid HEX color format")
+        elif isinstance(color, tuple): # RGB/HSL
+            if len(color) == 3: # RGB
+                color = color + (alpha,)
+            elif len(color) == 4: # HSL
+                color = color[:3] + (alpha,)
+        else:
+            # raise ValueError("Invalid color format")
+            logging.error("Invalid color format")
+            color = "#FFFFFF"        
+        logging.info(f"color b: {color}")
+        logging.info(f"alpha b: {alpha}")
+
+
+        logging.info(f"background_color a: {background_color}")
+        logging.info(f"background_alpha a: {background_alpha}")
+        # 判断background_color格式(HEX/RGB/HSL)，以加上透明度background_alpha
+        if isinstance(background_color, str) and background_color.startswith("#"):
+            if len(background_color) == 7: # HEX
+                background_color = background_color + hex(background_alpha)[2:].zfill(2)
+            elif len(background_color) == 9: 
+                background_color = background_color[:7] + hex(background_alpha)[2:].zfill(2)
+            else:
+                raise ValueError("Invalid HEX color format")
+        elif isinstance(background_color, tuple): # RGB/HSL
+            if len(background_color) == 3: # RGB
+                background_color = background_color + (background_alpha,)
+            elif len(background_color) == 4: # HSL
+                background_color = background_color[:3] + (background_alpha,)
+        else:
+            # raise ValueError("Invalid color format")
+            logging.error("Invalid background_color format")
+            background_color = (0,0,0,0)
+        logging.info(f"background_color b: {background_color}")
+        logging.info(f"background_alpha b: {background_alpha}")
 
         font = ImageFont.truetype(os.path.join(FONTS_DIR, font), size)
 
