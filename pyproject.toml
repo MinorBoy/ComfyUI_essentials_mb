@@ -1,7 +1,7 @@
 [project]
 name = "comfyui_essentials_mb"
 description = "Essential nodes. Fork from ComfyUI_essentials"
-version = "1.1.0"
+version = "1.1.1"
 license = { file = "LICENSE" }
 dependencies = ["numba", "colour-science", "rembg", "pixeloe"]
 
