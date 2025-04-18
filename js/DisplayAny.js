@@ -2,9 +2,9 @@ import { app } from "../../scripts/app.js";
 import { ComfyWidgets } from "../../scripts/widgets.js";
 
 app.registerExtension({
-    name: "essentials.DisplayAny",
+    name: "essentials_mb.DisplayAny",
     async beforeRegisterNodeDef(nodeType, nodeData, app) {
-        if (!nodeData?.category?.startsWith("essentials")) {
+        if (!nodeData?.category?.startsWith("essentials_mb")) {
             return;
         }
 

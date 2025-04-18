@@ -38,7 +38,7 @@ class ImageEnhanceDifference:
 
     RETURN_TYPES = ("IMAGE",)
     FUNCTION = "execute"
-    CATEGORY = "essentials/image analysis"
+    CATEGORY = "essentials_mb/image analysis"
 
     def execute(self, image1, image2, exponent):
         if image1.shape[1:] != image2.shape[1:]:
@@ -72,7 +72,7 @@ class ImageBatchMultiple:
         }
     RETURN_TYPES = ("IMAGE",)
     FUNCTION = "execute"
-    CATEGORY = "essentials/image batch"
+    CATEGORY = "essentials_mb/image batch"
 
     def execute(self, image_1, method, image_2=None, image_3=None, image_4=None, image_5=None):
         out = image_1
@@ -110,7 +110,7 @@ class ImageExpandBatch:
 
     RETURN_TYPES = ("IMAGE",)
     FUNCTION = "execute"
-    CATEGORY = "essentials/image batch"
+    CATEGORY = "essentials_mb/image batch"
 
     def execute(self, image, size, method):
         orig_size = image.shape[0]
@@ -159,7 +159,7 @@ class ImageFromBatch:
 
     RETURN_TYPES = ("IMAGE",)
     FUNCTION = "execute"
-    CATEGORY = "essentials/image batch"
+    CATEGORY = "essentials_mb/image batch"
 
     def execute(self, image, start, length):
         if length<0:
@@ -181,7 +181,7 @@ class ImageListToBatch:
     RETURN_TYPES = ("IMAGE",)
     FUNCTION = "execute"
     INPUT_IS_LIST = True
-    CATEGORY = "essentials/image batch"
+    CATEGORY = "essentials_mb/image batch"
 
     def execute(self, image):
         shape = image[0].shape[1:3]
@@ -209,7 +209,7 @@ class ImageBatchToList:
     RETURN_TYPES = ("IMAGE",)
     OUTPUT_IS_LIST = (True,)
     FUNCTION = "execute"
-    CATEGORY = "essentials/image batch"
+    CATEGORY = "essentials_mb/image batch"
 
     def execute(self, image):
         return ([image[i].unsqueeze(0) for i in range(image.shape[0])], )
@@ -234,7 +234,7 @@ class ImageCompositeFromMaskBatch:
 
     RETURN_TYPES = ("IMAGE",)
     FUNCTION = "execute"
-    CATEGORY = "essentials/image manipulation"
+    CATEGORY = "essentials_mb/image manipulation"
 
     def execute(self, image_from, image_to, mask):
         frames = mask.shape[0]
@@ -275,7 +275,7 @@ class ImageComposite:
 
     RETURN_TYPES = ("IMAGE",)
     FUNCTION = "execute"
-    CATEGORY = "essentials/image manipulation"
+    CATEGORY = "essentials_mb/image manipulation"
 
     def execute(self, destination, source, x, y, offset_x, offset_y, mask=None):
         if mask is None:
@@ -359,7 +359,7 @@ class ImageResize:
     RETURN_TYPES = ("IMAGE", "INT", "INT",)
     RETURN_NAMES = ("IMAGE", "width", "height",)
     FUNCTION = "execute"
-    CATEGORY = "essentials/image manipulation"
+    CATEGORY = "essentials_mb/image manipulation"
 
     def execute(self, image, width, height, method="stretch", interpolation="nearest", condition="always", multiple_of=0, keep_proportion=False):
         _, oh, ow, _ = image.shape
@@ -469,7 +469,7 @@ class ImageFlip:
 
     RETURN_TYPES = ("IMAGE",)
     FUNCTION = "execute"
-    CATEGORY = "essentials/image manipulation"
+    CATEGORY = "essentials_mb/image manipulation"
 
     def execute(self, image, axis):
         dim = ()
@@ -498,7 +498,7 @@ class ImageCrop:
     RETURN_TYPES = ("IMAGE","INT","INT",)
     RETURN_NAMES = ("IMAGE","x","y",)
     FUNCTION = "execute"
-    CATEGORY = "essentials/image manipulation"
+    CATEGORY = "essentials_mb/image manipulation"
 
     def execute(self, image, width, height, position, x_offset, y_offset):
         _, oh, ow, _ = image.shape
@@ -554,7 +554,7 @@ class ImageTile:
     RETURN_TYPES = ("IMAGE", "INT", "INT", "INT", "INT")
     RETURN_NAMES = ("IMAGE", "tile_width", "tile_height", "overlap_x", "overlap_y",)
     FUNCTION = "execute"
-    CATEGORY = "essentials/image manipulation"
+    CATEGORY = "essentials_mb/image manipulation"
 
     def execute(self, image, rows, cols, overlap, overlap_x, overlap_y):
         h, w = image.shape[1:3]
@@ -615,7 +615,7 @@ class ImageUntile:
 
     RETURN_TYPES = ("IMAGE",)
     FUNCTION = "execute"
-    CATEGORY = "essentials/image manipulation"
+    CATEGORY = "essentials_mb/image manipulation"
 
     def execute(self, tiles, overlap_x, overlap_y, rows, cols):
         tile_h, tile_w = tiles.shape[1:3]
@@ -684,7 +684,7 @@ class ImageSeamCarving:
         }
 
     RETURN_TYPES = ("IMAGE",)
-    CATEGORY = "essentials/image manipulation"
+    CATEGORY = "essentials_mb/image manipulation"
     FUNCTION = "execute"
 
     def execute(self, image, width, height, energy, order, keep_mask=None, drop_mask=None):
@@ -734,7 +734,7 @@ class ImageRandomTransform:
 
     RETURN_TYPES = ("IMAGE",)
     FUNCTION = "execute"
-    CATEGORY = "essentials/image manipulation"
+    CATEGORY = "essentials_mb/image manipulation"
 
     def execute(self, image, seed, repeat, variation):
         h, w = image.shape[1:3]
@@ -777,7 +777,7 @@ class RemBGSession:
 
     RETURN_TYPES = ("REMBG_SESSION",)
     FUNCTION = "execute"
-    CATEGORY = "essentials/image manipulation"
+    CATEGORY = "essentials_mb/image manipulation"
 
     def execute(self, model, providers):
         from rembg import new_session, remove
@@ -804,7 +804,7 @@ class TransparentBGSession:
 
     RETURN_TYPES = ("REMBG_SESSION",)
     FUNCTION = "execute"
-    CATEGORY = "essentials/image manipulation"
+    CATEGORY = "essentials_mb/image manipulation"
 
     def execute(self, mode, use_jit):
         from transparent_background import Remover
@@ -829,7 +829,7 @@ class ImageRemoveBackground:
 
     RETURN_TYPES = ("IMAGE", "MASK",)
     FUNCTION = "execute"
-    CATEGORY = "essentials/image manipulation"
+    CATEGORY = "essentials_mb/image manipulation"
 
     def execute(self, rembg_session, image):
         image = image.permute([0, 3, 1, 2])
@@ -865,7 +865,7 @@ class ImageDesaturate:
 
     RETURN_TYPES = ("IMAGE",)
     FUNCTION = "execute"
-    CATEGORY = "essentials/image processing"
+    CATEGORY = "essentials_mb/image processing"
 
     def execute(self, image, factor, method):
         if method == "luminance (Rec.709)":
@@ -901,7 +901,7 @@ class PixelOEPixelize:
 
     RETURN_TYPES = ("IMAGE",)
     FUNCTION = "execute"
-    CATEGORY = "essentials/image processing"
+    CATEGORY = "essentials_mb/image processing"
 
     def execute(self, image, downscale_mode, target_size, patch_size, thickness, color_matching, upscale):
         from pixeloe.pixelize import pixelize
@@ -936,7 +936,7 @@ class ImagePosterize:
 
     RETURN_TYPES = ("IMAGE",)
     FUNCTION = "execute"
-    CATEGORY = "essentials/image processing"
+    CATEGORY = "essentials_mb/image processing"
 
     def execute(self, image, threshold):
         image = image.mean(dim=3, keepdim=True)
@@ -960,7 +960,7 @@ class ImageApplyLUT:
 
     RETURN_TYPES = ("IMAGE",)
     FUNCTION = "execute"
-    CATEGORY = "essentials/image processing"
+    CATEGORY = "essentials_mb/image processing"
 
     # TODO: check if we can do without numpy
     def execute(self, image, lut_file, gamma_correction, clip_values, strength):
@@ -1024,7 +1024,7 @@ class ImageCAS:
         }
 
     RETURN_TYPES = ("IMAGE",)
-    CATEGORY = "essentials/image processing"
+    CATEGORY = "essentials_mb/image processing"
     FUNCTION = "execute"
 
     def execute(self, image, amount):
@@ -1082,7 +1082,7 @@ class ImageSmartSharpen:
         }}
 
     RETURN_TYPES = ("IMAGE",)
-    CATEGORY = "essentials/image processing"
+    CATEGORY = "essentials_mb/image processing"
     FUNCTION = "execute"
 
     def execute(self, image, noise_radius, preserve_edges, sharpen, ratio):
@@ -1131,7 +1131,7 @@ class ExtractKeyframes:
     RETURN_NAMES = ("KEYFRAMES", "indexes")
 
     FUNCTION = "execute"
-    CATEGORY = "essentials"
+    CATEGORY = "essentials_mb"
 
     def execute(self, image, threshold):
         window_size = 2
@@ -1169,7 +1169,7 @@ class ImageColorMatch:
 
     RETURN_TYPES = ("IMAGE",)
     FUNCTION = "execute"
-    CATEGORY = "essentials/image processing"
+    CATEGORY = "essentials_mb/image processing"
 
     def execute(self, image, reference, color_space, factor, device, batch_size, reference_mask=None):
         if "gpu" == device:
@@ -1298,7 +1298,7 @@ class ImageColorMatchAdobe(ImageColorMatch):
 
     RETURN_TYPES = ("IMAGE",)
     FUNCTION = "execute"
-    CATEGORY = "essentials/image processing"
+    CATEGORY = "essentials_mb/image processing"
 
     def analyze_color_statistics(self, image, mask=None):
         # Assuming image is in RGB format
@@ -1412,7 +1412,7 @@ class ImageHistogramMatch:
 
     RETURN_TYPES = ("IMAGE",)
     FUNCTION = "execute"
-    CATEGORY = "essentials/image processing"
+    CATEGORY = "essentials_mb/image processing"
 
     def execute(self, image, reference, method, factor, device):
         if "gpu" == device:
@@ -1465,7 +1465,7 @@ class ImageToDevice:
 
     RETURN_TYPES = ("IMAGE",)
     FUNCTION = "execute"
-    CATEGORY = "essentials/image utils"
+    CATEGORY = "essentials_mb/image utils"
 
     def execute(self, image, device):
         if "gpu" == device:
@@ -1492,7 +1492,7 @@ class GetImageSize:
     RETURN_TYPES = ("INT", "INT", "INT",)
     RETURN_NAMES = ("width", "height", "count")
     FUNCTION = "execute"
-    CATEGORY = "essentials/image utils"
+    CATEGORY = "essentials_mb/image utils"
 
     def execute(self, image):
         return (image.shape[2], image.shape[1], image.shape[0])
@@ -1508,7 +1508,7 @@ class ImageRemoveAlpha:
 
     RETURN_TYPES = ("IMAGE",)
     FUNCTION = "execute"
-    CATEGORY = "essentials/image utils"
+    CATEGORY = "essentials_mb/image utils"
 
     def execute(self, image):
         if image.shape[3] == 4:
@@ -1540,7 +1540,7 @@ class ImagePreviewFromLatent(SaveImage):
     RETURN_TYPES = ("IMAGE", "MASK", "INT", "INT",)
     RETURN_NAMES = ("IMAGE", "MASK", "width", "height",)
     FUNCTION = "execute"
-    CATEGORY = "essentials/image utils"
+    CATEGORY = "essentials_mb/image utils"
 
     def execute(self, latent, vae, tile_size, prompt=None, extra_pnginfo=None, image=None, filename_prefix="ComfyUI"):
         mask = torch.zeros((64,64), dtype=torch.float32, device="cpu")
@@ -1600,7 +1600,7 @@ class NoiseFromImage:
 
     RETURN_TYPES = ("IMAGE",)
     FUNCTION = "execute"
-    CATEGORY = "essentials/image utils"
+    CATEGORY = "essentials_mb/image utils"
 
     def execute(self, image, noise_size, color_noise, mask_strength, mask_scale_diff, mask_contrast, noise_strenght, saturation, contrast, blur, noise_mask=None):
         torch.manual_seed(0)

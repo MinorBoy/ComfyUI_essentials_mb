@@ -35,7 +35,7 @@ class DrawText:
 
     RETURN_TYPES = ("IMAGE", "MASK",)
     FUNCTION = "execute"
-    CATEGORY = "essentials/text"
+    CATEGORY = "essentials_mb/text"
 
     def execute(self, text, font, size, color, alpha, background_color, background_alpha, shadow_distance, shadow_blur, shadow_color, horizontal_align, vertical_align, offset_x, offset_y, direction, img_composite=None):
         from PIL import Image, ImageDraw, ImageFont, ImageColor, ImageFilter

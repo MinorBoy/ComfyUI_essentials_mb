@@ -13,7 +13,7 @@ class CLIPTextEncodeSDXLSimplified:
             }}
     RETURN_TYPES = ("CONDITIONING",)
     FUNCTION = "execute"
-    CATEGORY = "essentials/conditioning"
+    CATEGORY = "essentials_mb/conditioning"
 
     def execute(self, clip, width, height, size_cond_factor, text):
         crop_w = 0
@@ -50,7 +50,7 @@ class ConditioningCombineMultiple:
         }
     RETURN_TYPES = ("CONDITIONING",)
     FUNCTION = "execute"
-    CATEGORY = "essentials/conditioning"
+    CATEGORY = "essentials_mb/conditioning"
 
     def execute(self, conditioning_1, conditioning_2, conditioning_3=None, conditioning_4=None, conditioning_5=None):
         c = conditioning_1 + conditioning_2
@@ -73,7 +73,7 @@ class SD3NegativeConditioning:
         }}
     RETURN_TYPES = ("CONDITIONING",)
     FUNCTION = "execute"
-    CATEGORY = "essentials/conditioning"
+    CATEGORY = "essentials_mb/conditioning"
 
     def execute(self, conditioning, end):
         zero_c = ConditioningZeroOut().zero_out(conditioning)[0]
@@ -103,7 +103,7 @@ class FluxAttentionSeeker:
     RETURN_TYPES = ("CLIP",)
     FUNCTION = "execute"
 
-    CATEGORY = "essentials/conditioning"
+    CATEGORY = "essentials_mb/conditioning"
 
     def execute(self, clip, apply_to_query, apply_to_key, apply_to_value, apply_to_out, **values):
         if not apply_to_key and not apply_to_query and not apply_to_value and not apply_to_out:
@@ -146,7 +146,7 @@ class SD3AttentionSeekerLG:
     RETURN_TYPES = ("CLIP",)
     FUNCTION = "execute"
 
-    CATEGORY = "essentials/conditioning"
+    CATEGORY = "essentials_mb/conditioning"
 
     def execute(self, clip, apply_to_query, apply_to_key, apply_to_value, apply_to_out, **values):
         if not apply_to_key and not apply_to_query and not apply_to_value and not apply_to_out:
@@ -185,7 +185,7 @@ class SD3AttentionSeekerT5:
     RETURN_TYPES = ("CLIP",)
     FUNCTION = "execute"
 
-    CATEGORY = "essentials/conditioning"
+    CATEGORY = "essentials_mb/conditioning"
 
     def execute(self, clip, apply_to_query, apply_to_key, apply_to_value, apply_to_out, **values):
         if not apply_to_key and not apply_to_query and not apply_to_value and not apply_to_out:
@@ -218,7 +218,7 @@ class FluxBlocksBuster:
     RETURN_NAMES = ("MODEL", "patched_blocks")
     FUNCTION = "patch"
 
-    CATEGORY = "essentials/conditioning"
+    CATEGORY = "essentials_mb/conditioning"
 
     def patch(self, model, blocks):
         if blocks == "":

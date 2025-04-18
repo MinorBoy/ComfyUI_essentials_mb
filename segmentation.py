@@ -12,7 +12,7 @@ class LoadCLIPSegModels:
 
     RETURN_TYPES = ("CLIP_SEG",)
     FUNCTION = "execute"
-    CATEGORY = "essentials/segmentation"
+    CATEGORY = "essentials_mb/segmentation"
 
     def execute(self):
         from transformers import CLIPSegProcessor, CLIPSegForImageSegmentation
@@ -38,7 +38,7 @@ class ApplyCLIPSeg:
 
     RETURN_TYPES = ("MASK",)
     FUNCTION = "execute"
-    CATEGORY = "essentials/segmentation"
+    CATEGORY = "essentials_mb/segmentation"
 
     def execute(self, image, clip_seg, prompt, threshold, smooth, dilate, blur):
         processor, model = clip_seg

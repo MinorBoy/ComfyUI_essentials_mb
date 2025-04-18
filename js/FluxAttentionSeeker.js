@@ -1,9 +1,9 @@
 import { app } from "../../scripts/app.js";
 
 app.registerExtension({
-    name: "essentials.FluxAttentionSeeker",
+    name: "essentials_mb.FluxAttentionSeeker",
     async beforeRegisterNodeDef(nodeType, nodeData, app) {
-        if (!nodeData?.category?.startsWith("essentials")) {
+        if (!nodeData?.category?.startsWith("essentials_mb")) {
             return;
         }
 
@@ -50,9 +50,9 @@ app.registerExtension({
 });
 
 app.registerExtension({
-    name: "essentials.SD3AttentionSeekerLG",
+    name: "essentials_mb.SD3AttentionSeekerLG",
     async beforeRegisterNodeDef(nodeType, nodeData, app) {
-        if (!nodeData?.category?.startsWith("essentials")) {
+        if (!nodeData?.category?.startsWith("essentials_mb")) {
             return;
         }
 
@@ -98,9 +98,9 @@ app.registerExtension({
 });
 
 app.registerExtension({
-    name: "essentials.SD3AttentionSeekerT5",
+    name: "essentials_mb.SD3AttentionSeekerT5",
     async beforeRegisterNodeDef(nodeType, nodeData, app) {
-        if (!nodeData?.category?.startsWith("essentials")) {
+        if (!nodeData?.category?.startsWith("essentials_mb")) {
             return;
         }
 

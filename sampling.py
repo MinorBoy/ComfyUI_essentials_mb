@@ -52,7 +52,7 @@ class KSamplerVariationsWithNoise:
 
     RETURN_TYPES = ("LATENT",)
     FUNCTION = "execute"
-    CATEGORY = "essentials/sampling"
+    CATEGORY = "essentials_mb/sampling"
 
     def prepare_mask(self, mask, shape):
         mask = torch.nn.functional.interpolate(mask.reshape((-1, 1, mask.shape[-2], mask.shape[-1])), size=(shape[2], shape[3]), mode="bilinear")
@@ -125,7 +125,7 @@ class KSamplerVariationsStochastic:
 
     RETURN_TYPES = ("LATENT", )
     FUNCTION = "execute"
-    CATEGORY = "essentials/sampling"
+    CATEGORY = "essentials_mb/sampling"
 
     def execute(self, model, latent_image, noise_seed, steps, cfg, sampler, scheduler, positive, negative, variation_seed, variation_strength, cfg_scale, variation_sampler="dpmpp_2m_sde"):
         # Stage 1: composition sampler
@@ -168,7 +168,7 @@ class InjectLatentNoise:
 
     RETURN_TYPES = ("LATENT",)
     FUNCTION = "execute"
-    CATEGORY = "essentials/sampling"
+    CATEGORY = "essentials_mb/sampling"
 
     def execute(self, latent, noise_seed, noise_strength, normalize="false", mask=None):
         torch.manual_seed(noise_seed)
@@ -207,7 +207,7 @@ class TextEncodeForSamplerParams:
 
     RETURN_TYPES = ("CONDITIONING", )
     FUNCTION = "execute"
-    CATEGORY = "essentials/sampling"
+    CATEGORY = "essentials_mb/sampling"
 
     def execute(self, text, clip):
         import re
@@ -238,7 +238,7 @@ class SamplerSelectHelper:
 
     RETURN_TYPES = ("STRING", )
     FUNCTION = "execute"
-    CATEGORY = "essentials/sampling"
+    CATEGORY = "essentials_mb/sampling"
 
     def execute(self, **values):
         values = [v for v in values if values[v]]
@@ -255,7 +255,7 @@ class SchedulerSelectHelper:
 
     RETURN_TYPES = ("STRING", )
     FUNCTION = "execute"
-    CATEGORY = "essentials/sampling"
+    CATEGORY = "essentials_mb/sampling"
 
     def execute(self, **values):
         values = [v for v in values if values[v]]
@@ -284,7 +284,7 @@ class LorasForFluxParams:
 
     RETURN_TYPES = ("LORA_PARAMS", )
     FUNCTION = "execute"
-    CATEGORY = "essentials/sampling"
+    CATEGORY = "essentials_mb/sampling"
 
     def execute(self, lora_1, strength_model_1, lora_2="none", strength_lora_2="", lora_3="none", strength_lora_3="", lora_4="none", strength_lora_4=""):
         output = { "loras": [], "strengths": [] }
@@ -338,7 +338,7 @@ class FluxSamplerParams:
     RETURN_TYPES = ("LATENT","SAMPLER_PARAMS")
     RETURN_NAMES = ("latent", "params")
     FUNCTION = "execute"
-    CATEGORY = "essentials/sampling"
+    CATEGORY = "essentials_mb/sampling"
 
     def execute(self, model, conditioning, latent_image, seed, sampler, scheduler, steps, guidance, max_shift, base_shift, denoise, loras=None):
         import random
@@ -518,7 +518,7 @@ class PlotParameters:
 
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "execute"
-    CATEGORY = "essentials/sampling"
+    CATEGORY = "essentials_mb/sampling"
 
     def execute(self, images, params, order_by, cols_value, cols_num, add_prompt, add_params):
         from PIL import Image, ImageDraw, ImageFont
@@ -684,7 +684,7 @@ class GuidanceTimestepping:
 
     RETURN_TYPES = ("MODEL",)
     FUNCTION = "execute"
-    CATEGORY = "essentials/sampling"
+    CATEGORY = "essentials_mb/sampling"
 
     def execute(self, model, value, start_at, end_at):
         sigma_start = model.get_model_object("model_sampling").percent_to_sigma(start_at)
@@ -764,7 +764,7 @@ class ModelSamplingSD3Advanced:
     RETURN_TYPES = ("MODEL",)
     FUNCTION = "execute"
 
-    CATEGORY = "essentials/sampling"
+    CATEGORY = "essentials_mb/sampling"
 
     def execute(self, model, shift, multiplier=1000, cut_off=1.0, shift_multiplier=0):
         m = model.clone()

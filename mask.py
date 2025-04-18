@@ -27,7 +27,7 @@ class MaskBlur:
 
     RETURN_TYPES = ("MASK",)
     FUNCTION = "execute"
-    CATEGORY = "essentials/mask"
+    CATEGORY = "essentials_mb/mask"
 
     def execute(self, mask, amount, device):
         if amount == 0:
@@ -63,7 +63,7 @@ class MaskFlip:
 
     RETURN_TYPES = ("MASK",)
     FUNCTION = "execute"
-    CATEGORY = "essentials/mask"
+    CATEGORY = "essentials_mb/mask"
 
     def execute(self, mask, axis):
         if mask.dim() == 2:
@@ -93,7 +93,7 @@ class MaskPreview(SaveImage):
         }
 
     FUNCTION = "execute"
-    CATEGORY = "essentials/mask"
+    CATEGORY = "essentials_mb/mask"
 
     def execute(self, mask, filename_prefix="ComfyUI", prompt=None, extra_pnginfo=None):
         preview = mask.reshape((-1, 1, mask.shape[-2], mask.shape[-1])).movedim(1, -1).expand(-1, -1, -1, 3)
@@ -111,7 +111,7 @@ class MaskBatch:
 
     RETURN_TYPES = ("MASK",)
     FUNCTION = "execute"
-    CATEGORY = "essentials/mask batch"
+    CATEGORY = "essentials_mb/mask batch"
 
     def execute(self, mask1, mask2):
         if mask1.shape[1:] != mask2.shape[1:]:
@@ -132,7 +132,7 @@ class MaskExpandBatch:
 
     RETURN_TYPES = ("MASK",)
     FUNCTION = "execute"
-    CATEGORY = "essentials/mask batch"
+    CATEGORY = "essentials_mb/mask batch"
 
     def execute(self, mask, size, method):
         return (ImageExpandBatch().execute(mask.unsqueeze(1).expand(-1,3,-1,-1), size, method)[0][:,0,:,:],)
@@ -155,7 +155,7 @@ class MaskBoundingBox:
     RETURN_TYPES = ("MASK", "IMAGE", "INT", "INT", "INT", "INT")
     RETURN_NAMES = ("MASK", "IMAGE", "x", "y", "width", "height")
     FUNCTION = "execute"
-    CATEGORY = "essentials/mask"
+    CATEGORY = "essentials_mb/mask"
 
     def execute(self, mask, padding, blur, image_optional=None):
         if mask.dim() == 2:
@@ -208,7 +208,7 @@ class MaskFromColor:
 
     RETURN_TYPES = ("MASK",)
     FUNCTION = "execute"
-    CATEGORY = "essentials/mask"
+    CATEGORY = "essentials_mb/mask"
 
     def execute(self, image, red, green, blue, threshold):
         temp = (torch.clamp(image, 0, 1.0) * 255.0).round().to(torch.int)
@@ -239,7 +239,7 @@ class MaskFromSegmentation:
 
     RETURN_TYPES = ("MASK",)
     FUNCTION = "execute"
-    CATEGORY = "essentials/mask"
+    CATEGORY = "essentials_mb/mask"
 
     def execute(self, image, segments, remove_isolated_pixels, fill_holes, remove_small_masks):
         im = image[0] # we only work on the first image in the batch
@@ -289,7 +289,7 @@ class MaskFix:
 
     RETURN_TYPES = ("MASK",)
     FUNCTION = "execute"
-    CATEGORY = "essentials/mask"
+    CATEGORY = "essentials_mb/mask"
 
     def execute(self, mask, erode_dilate, smooth, remove_isolated_pixels, blur, fill_holes):
         masks = []
@@ -340,7 +340,7 @@ class MaskSmooth:
 
     RETURN_TYPES = ("MASK",)
     FUNCTION = "execute"
-    CATEGORY = "essentials/mask"
+    CATEGORY = "essentials_mb/mask"
 
     def execute(self, mask, amount):
         if amount == 0:
@@ -367,7 +367,7 @@ class MaskFromBatch:
 
     RETURN_TYPES = ("MASK",)
     FUNCTION = "execute"
-    CATEGORY = "essentials/mask batch"
+    CATEGORY = "essentials_mb/mask batch"
 
     def execute(self, mask, start, length):
         if length > mask.shape[0]:
@@ -392,7 +392,7 @@ class MaskFromList:
 
     RETURN_TYPES = ("MASK",)
     FUNCTION = "execute"
-    CATEGORY = "essentials/mask"
+    CATEGORY = "essentials_mb/mask"
 
     def execute(self, width, height, values=None, str_values=""):
         out = []
@@ -433,7 +433,7 @@ class MaskFromRGBCMYBW:
     RETURN_TYPES = ("MASK","MASK","MASK","MASK","MASK","MASK","MASK","MASK",)
     RETURN_NAMES = ("red","green","blue","cyan","magenta","yellow","black","white",)
     FUNCTION = "execute"
-    CATEGORY = "essentials/mask"
+    CATEGORY = "essentials_mb/mask"
 
     def execute(self, image, threshold_r, threshold_g, threshold_b):
         red = ((image[..., 0] >= 1-threshold_r) & (image[..., 1] < threshold_g) & (image[..., 2] < threshold_b)).float()
@@ -466,7 +466,7 @@ class TransitionMask:
 
     RETURN_TYPES = ("MASK",)
     FUNCTION = "execute"
-    CATEGORY = "essentials/mask"
+    CATEGORY = "essentials_mb/mask"
 
     def linear(self, i, t):
         return i/t

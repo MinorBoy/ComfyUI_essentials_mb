@@ -18,7 +18,7 @@ class SimpleMathFloat:
 
     RETURN_TYPES = ("FLOAT", )
     FUNCTION = "execute"
-    CATEGORY = "essentials/utilities"
+    CATEGORY = "essentials_mb/utilities"
 
     def execute(self, value):
         return (float(value), )
@@ -34,7 +34,7 @@ class SimpleMathPercent:
 
     RETURN_TYPES = ("FLOAT", )
     FUNCTION = "execute"
-    CATEGORY = "essentials/utilities"
+    CATEGORY = "essentials_mb/utilities"
 
     def execute(self, value):
         return (float(value), )
@@ -50,7 +50,7 @@ class SimpleMathInt:
 
     RETURN_TYPES = ("INT",)
     FUNCTION = "execute"
-    CATEGORY = "essentials/utilities"
+    CATEGORY = "essentials_mb/utilities"
 
     def execute(self, value):
         return (int(value), )
@@ -69,7 +69,7 @@ class SimpleMathSlider:
 
     RETURN_TYPES = ("FLOAT", "INT",)
     FUNCTION = "execute"
-    CATEGORY = "essentials/utilities"
+    CATEGORY = "essentials_mb/utilities"
 
     def execute(self, value, min, max, rounding):
         value = min + value * (max - min)
@@ -93,7 +93,7 @@ class SimpleMathSliderLowRes:
 
     RETURN_TYPES = ("FLOAT", "INT",)
     FUNCTION = "execute"
-    CATEGORY = "essentials/utilities"
+    CATEGORY = "essentials_mb/utilities"
 
     def execute(self, value, min, max, rounding):
         value = 0.1 * value
@@ -114,7 +114,7 @@ class SimpleMathBoolean:
 
     RETURN_TYPES = ("BOOLEAN",)
     FUNCTION = "execute"
-    CATEGORY = "essentials/utilities"
+    CATEGORY = "essentials_mb/utilities"
 
     def execute(self, value):
         return (value, int(value), )
@@ -135,7 +135,7 @@ class SimpleMath:
 
     RETURN_TYPES = ("INT", "FLOAT", )
     FUNCTION = "execute"
-    CATEGORY = "essentials/utilities"
+    CATEGORY = "essentials_mb/utilities"
 
     def execute(self, value, a = 0.0, b = 0.0, c = 0.0, d = 0.0):
         import ast
@@ -255,7 +255,7 @@ class SimpleMathDual:
     RETURN_TYPES = ("INT", "FLOAT", "INT", "FLOAT", )
     RETURN_NAMES = ("int_1", "float_1", "int_2", "float_2" )
     FUNCTION = "execute"
-    CATEGORY = "essentials/utilities"
+    CATEGORY = "essentials_mb/utilities"
 
     def execute(self, value_1, value_2, a = 0.0, b = 0.0, c = 0.0, d = 0.0):
         return SimpleMath().execute(value_1, a, b, c, d) + SimpleMath().execute(value_2, a, b, c, d)
@@ -278,7 +278,7 @@ class SimpleMathCondition:
     
     RETURN_TYPES = ("INT", "FLOAT", )
     FUNCTION = "execute"
-    CATEGORY = "essentials/utilities"
+    CATEGORY = "essentials_mb/utilities"
 
     def execute(self, evaluate, on_true, on_false, a = 0.0, b = 0.0, c = 0.0):
         return SimpleMath().execute(on_true if evaluate else on_false, a, b, c)
@@ -303,7 +303,7 @@ class SimpleCondition:
     RETURN_NAMES = ("result",)
     FUNCTION = "execute"
 
-    CATEGORY = "essentials/utilities"
+    CATEGORY = "essentials_mb/utilities"
 
     def execute(self, evaluate, on_true, on_false=None):
         from comfy_execution.graph import ExecutionBlocker
@@ -329,7 +329,7 @@ class SimpleComparison:
     RETURN_TYPES = ("BOOLEAN",)
     FUNCTION = "execute"
 
-    CATEGORY = "essentials/utilities"
+    CATEGORY = "essentials_mb/utilities"
 
     def execute(self, a, b, comparison):
         if comparison == "==":
@@ -359,7 +359,7 @@ class ConsoleDebug:
 
     RETURN_TYPES = ()
     FUNCTION = "execute"
-    CATEGORY = "essentials/utilities"
+    CATEGORY = "essentials_mb/utilities"
     OUTPUT_NODE = True
 
     def execute(self, value, prefix):
@@ -378,7 +378,7 @@ class DebugTensorShape:
 
     RETURN_TYPES = ()
     FUNCTION = "execute"
-    CATEGORY = "essentials/utilities"
+    CATEGORY = "essentials_mb/utilities"
     OUTPUT_NODE = True
 
     def execute(self, tensor):
@@ -410,7 +410,7 @@ class BatchCount:
 
     RETURN_TYPES = ("INT",)
     FUNCTION = "execute"
-    CATEGORY = "essentials/utilities"
+    CATEGORY = "essentials_mb/utilities"
 
     def execute(self, batch):
         count = 0
@@ -437,7 +437,7 @@ class ModelCompile():
 
     RETURN_TYPES = ("MODEL", )
     FUNCTION = "execute"
-    CATEGORY = "essentials/utilities"
+    CATEGORY = "essentials_mb/utilities"
 
     def execute(self, model, fullgraph, dynamic, mode):
         work_model = model.clone()
@@ -452,7 +452,7 @@ class RemoveLatentMask:
     RETURN_TYPES = ("LATENT",)
     FUNCTION = "execute"
 
-    CATEGORY = "essentials/utilities"
+    CATEGORY = "essentials_mb/utilities"
 
     def execute(self, samples):
         s = samples.copy()
@@ -477,7 +477,7 @@ class SDXLEmptyLatentSizePicker:
     RETURN_TYPES = ("LATENT","INT","INT",)
     RETURN_NAMES = ("LATENT","width","height",)
     FUNCTION = "execute"
-    CATEGORY = "essentials/utilities"
+    CATEGORY = "essentials_mb/utilities"
 
     def execute(self, resolution, batch_size, width_override=0, height_override=0):
         width, height = resolution.split(" ")[0].split("x")
@@ -509,7 +509,7 @@ class DisplayAny:
     FUNCTION = "execute"
     OUTPUT_NODE = True
 
-    CATEGORY = "essentials/utilities"
+    CATEGORY = "essentials_mb/utilities"
 
     def execute(self, input, mode):
         if mode == "tensor shape":
