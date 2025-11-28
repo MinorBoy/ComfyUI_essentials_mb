@@ -9,7 +9,8 @@ Thanks to [cubiq](https://github.com/cubiq) for the original repo.
 
 ## Nodes
 
-### Image Analysis
+<details>
+<summary>### Image Analysis</summary>
 
 - 🔧 Image Enhance Difference
   - Inputs:
@@ -18,8 +19,10 @@ Thanks to [cubiq](https://github.com/cubiq) for the original repo.
     - exponent (FLOAT, default: 0.75, min: 0.00, max: 1.00, step: 0.05)
   - Outputs:
     - IMAGE
+</details>
 
-### Image Batch
+<details>
+<summary>### Image Batch</summary>
 
 - 🔧 Images Batch Multiple
   - Inputs:
@@ -59,8 +62,10 @@ Thanks to [cubiq](https://github.com/cubiq) for the original repo.
     - image (IMAGE)
   - Outputs:
     - IMAGE (list)
+</details>
 
-### Image Manipulation
+<details>
+<summary>### Image Manipulation</summary>
 
 - 🔧 Image Composite From Mask Batch
   - Inputs:
@@ -189,8 +194,10 @@ Thanks to [cubiq](https://github.com/cubiq) for the original repo.
     - use_jit (BOOLEAN, default: True)
   - Outputs:
     - REMBG_SESSION
+</details>
 
-### Image Processing
+<details>
+<summary>### Image Processing</summary>
 
 - 🔧 Image Apply LUT
   - Inputs:
@@ -281,8 +288,10 @@ Thanks to [cubiq](https://github.com/cubiq) for the original repo.
     - ratio (FLOAT, default: 0.5, min: 0.0, max: 1.0, step: 0.1)
   - Outputs:
     - IMAGE
+</details>
 
-### Image Utilities
+<details>
+<summary>### Image Utilities</summary>
 
 - 🔧 Get Image Size
   - Inputs:
@@ -328,8 +337,10 @@ Thanks to [cubiq](https://github.com/cubiq) for the original repo.
     - noise_mask (IMAGE, optional)
   - Outputs:
     - IMAGE
+</details>
 
-### Mask
+<details>
+<summary>### Mask</summary>
 
 - 🔧 Mask Blur
   - Inputs:
@@ -442,8 +453,10 @@ Thanks to [cubiq](https://github.com/cubiq) for the original repo.
     - timing_function ("linear", "in", "out", "in-out")
   - Outputs:
     - MASK
+</details>
 
-### Mask Batch
+<details>
+<summary>### Mask Batch</summary>
 
 - 🔧 Mask Batch
   - Inputs:
@@ -467,8 +480,10 @@ Thanks to [cubiq](https://github.com/cubiq) for the original repo.
     - length (INT, default: 1, min: 1, step: 1)
   - Outputs:
     - MASK
+</details>
 
-### Sampling
+<details>
+<summary>### Sampling</summary>
 
 - 🔧 KSampler Stochastic Variations
   - Inputs:
@@ -587,8 +602,10 @@ Thanks to [cubiq](https://github.com/cubiq) for the original repo.
     - shift_multiplier (FLOAT, default: 2, min: 0, max: 10, step: 0.05)
   - Outputs:
     - MODEL
+</details>
 
-### Segmentation
+<details>
+<summary>### Segmentation</summary>
 
 - 🔧 Apply CLIPSeg
   - Inputs:
@@ -607,8 +624,10 @@ Thanks to [cubiq](https://github.com/cubiq) for the original repo.
     - None
   - Outputs:
     - CLIP_SEG
+</details>
 
-### Utilities
+<details>
+<summary>### Utilities</summary>
 
 - 🔧 Batch Count
   - Inputs:
@@ -758,8 +777,10 @@ Thanks to [cubiq](https://github.com/cubiq) for the original repo.
   - Outputs:
     - FLOAT
     - INT
+</details>
 
-### Conditioning
+<details>
+<summary>### Conditioning</summary>
 
 - 🔧 SDXL CLIPTextEncode
   - Inputs:
@@ -830,8 +851,10 @@ Thanks to [cubiq](https://github.com/cubiq) for the original repo.
   - Outputs:
     - MODEL
     - patched_blocks (STRING)
+</details>
 
-### Text
+<details>
+<summary>### Text</summary>
 
 - 🔧 Draw Text
   - Inputs:
@@ -854,6 +877,7 @@ Thanks to [cubiq](https://github.com/cubiq) for the original repo.
   - Outputs:
     - IMAGE
     - MASK
+</details>
 
 ## Recent Changes
 
